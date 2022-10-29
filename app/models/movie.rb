@@ -20,4 +20,7 @@ class Movie < ApplicationRecord
   belongs_to(:director)
   has_many(:characters)
   has_many(:actors, {:through => :characters, :source => :actor})
+  
+  has_many(:bookmarks)
+  has_many(:users, {:through => :bookmarks, :source => :user})
 end

@@ -14,6 +14,8 @@ class MoviesController < ApplicationController
 
     @the_movie = matching_movies.at(0)
 
+    @user=User.where(:id => session["user_id"])[0]
+
     render({ :template => "movies/show.html.erb" })
   end
 

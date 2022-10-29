@@ -5,21 +5,13 @@ class BookmarksController < ApplicationController
       matching_bookmarks = Bookmark.where({:user_id => user_id})
 
       @list_of_bookmarks = matching_bookmarks.order({ :created_at => :desc })
-
-      # Movie.all.each do |movie|
-      #   movie_bookmarked=false
-
-      #   while movie_bookmarked == false
-      #     @list_of_bookmarks.each do |bookmark|
-      #       if movie.id==bookmark.movie_id
-      #         movie_bookmarked=true
-      #       end
-      #     end
-      #   end
-      #   if movie_bookmarked==false
-      #     @list_of_available_movies.push(movie)
-      #   end
-      # end
+      @list_of_available_movies=Array.new
+      Movie.all.each do |movie|
+        if @user.movies.include?(movie)==false
+          puts "hi #{movie.title}"
+          @list_of_available_movies.push(movie)
+        end
+      end
 
       render({ :template => "bookmarks/index.html.erb" })
   end

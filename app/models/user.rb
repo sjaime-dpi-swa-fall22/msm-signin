@@ -15,6 +15,7 @@ class User < ApplicationRecord
   validates :email, :presence => true
   has_secure_password
   
+  has_many(:bookmarks)
   has_many(:movies, {:through => :bookmarks, :source => :movie})
 
 end

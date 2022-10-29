@@ -23,14 +23,19 @@
 
     <hr>
 
-    <form action="/insert_bookmark" method="post">
+    <% if session["user_id"] != nil %>
 
-      <label for="movie_id"></label>
-      <input id="movie_id" name="movie_id" type="hidden" value="<%= @the_movie.id %>">
-
-      <button>Bookmark this movie!</button>
-
-    </form>
+      <% if @user.movies.include?(@the_movie)==false %>  <!--this move is not bookmarked yet-->
+        <form action="/insert_bookmark" method="post">
+          <label for="movie_id"></label>
+          <input id="movie_id" name="movie_id" type="hidden" value="<%= @the_movie.id %>">
+          <button>Bookmark this movie!</button>
+        </form>
+      <% else %> <!--this move is bookmarked-->
+        <% bookmark=Bookmark.where({:user_id => @user.id, :movie_id => @the_movie.id})[0] %>
+        <a href="/delete_bookmark/<%= bookmark.id %>">Un-bookmark</a>
+      <% end %>
+    <% end %>
 
     <dl>
       <dt>
