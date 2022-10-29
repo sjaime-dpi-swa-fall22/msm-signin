@@ -11,6 +11,9 @@
 #  updated_at :datetime         not null
 #
 class Actor < ApplicationRecord
+  validates(:name, {:presence => true })
+  validates(:dob, { :presence => true })
+
   has_many(:characters)
-  has_many(:movies, {:through => characters, :source => :movie})
+  has_many(:movies, {:through => :characters, :source => :movie})
 end

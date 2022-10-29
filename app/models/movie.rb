@@ -13,7 +13,11 @@
 #  director_id :integer
 #
 class Movie < ApplicationRecord
+  validates(:title, {:presence => true, :uniqueness => {:scope => :year} })
+  validates(:director_id, { :presence => true })
+  validates(:year, { :presence => true })
+
   belongs_to(:director)
   has_many(:characters)
-  has_many(:actors, {:through => characters, :source => :actor})
+  has_many(:actors, {:through => :characters, :source => :actor})
 end

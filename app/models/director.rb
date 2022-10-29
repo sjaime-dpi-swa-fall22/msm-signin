@@ -11,5 +11,7 @@
 #  updated_at :datetime         not null
 #
 class Director < ApplicationRecord
+  validates(:name, {:presence => true })
+
   has_many(:movies)  # or has_many(:filmography, "class_name=>"Movie")
 end
