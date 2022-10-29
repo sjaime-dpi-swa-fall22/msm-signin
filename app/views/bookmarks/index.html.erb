@@ -1,0 +1,71 @@
+<p style="color:green" ><%= notice %></p>
+<p style="color:red"><%= alert %></p>
+
+<div>
+  <div>
+    <h1>
+      <%= @user.first_name %> <%= @user.last_name %>'s bookmarks
+    </h1>
+  </div>
+</div>
+
+<div>
+  <div>
+
+    <form action="/insert_bookmark" method="post">
+  
+      <select name="movie_id" id="movies">
+        <% @list_of_available_movies.each do |movie| %>
+          <% title = movie.title %>
+          <option value=<%=movie.id%>><%= title%></option>
+        <% end %>
+      </select>
+
+      <button>
+        Bookmark this movie!
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          Movie
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_bookmarks.each do |a_bookmark| %>
+      <tr>
+
+        <td>
+          <%= a_bookmark.movie.title%>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_bookmark.created_at) %> ago
+        </td>
+        
+        <td>
+          <a href="/delete_bookmark/<%= a_bookmark.id %>">
+            Un-bookmark
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>
