@@ -22,5 +22,5 @@ class Movie < ApplicationRecord
   has_many(:actors, {:through => :characters, :source => :actor})
   
   has_many(:bookmarks)
-  has_many(:users, {:through => :bookmarks, :source => :user})
+  has_many(:users, {:through => :bookmarks, :source => :user})  # or: has_many(:bookmarkers, {:through => :bookmarks, :source => :user})
 end

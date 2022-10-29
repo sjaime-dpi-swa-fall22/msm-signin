@@ -25,9 +25,12 @@
 
     <% if session["user_id"] != nil %>
 
-      <% if @user.movies.include?(@the_movie)==false %>  <!--this move is not bookmarked yet-->
+      <% if @user.movies.include?(@the_movie)==false %>  <!--this move is not bookmarked yet, could also have done: 
+      if Bookmark.where({:user_id => @user.id, :movie_id => @the_movie.id}).count == 0 (and then wouldn't
+      have needed to use @user and just store session["user_id"] into a variable) 
+      @user.movies would return an array of class 'Movie', where each Movie in teh array was listed in the 
+      bookmarks table for thsi user -->
         <form action="/insert_bookmark" method="post">
-          <label for="movie_id"></label>
           <input id="movie_id" name="movie_id" type="hidden" value="<%= @the_movie.id %>">
           <button>Bookmark this movie!</button>
         </form>

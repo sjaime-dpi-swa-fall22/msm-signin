@@ -21,7 +21,7 @@
       <li><a href="/actors">Actors</a></li>
       <li><a href="/characters">Characters</a></li>
 
-      <% if !session["user_id"].present? %>
+      <% if !session["user_id"].present? %> <!--could of used if @current_user == nil instead -->
         <li><a href="/user_sign_up">Sign Up</a></li>
         <li><a href="/user_sign_in">Sign In</a></li>
       <% else %>
